@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Param from '../_components/param';
 import logo from '../_assets/logo.jpg';
 
