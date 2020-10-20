@@ -111,7 +111,7 @@ class Page extends Component{
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             };
-            return fetch(`https://lcg-server.herokuapp.com/${params[key].path}/find?name=${encodeURI(params[key].value)}&page=${encodeURI(page)}`, requestOptions) //https://lcg-server.herokuapp.com
+            return fetch(`https://lcg-server.herokuapp.com/${params[key].path}/find?name=${encodeURI(params[key].value)}&page=${encodeURI(page)}`, requestOptions)
             .then(response => response.text().then(text => {
                 this.setState({
                     loading: false,

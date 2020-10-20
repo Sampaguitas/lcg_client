@@ -10,7 +10,7 @@ class Param extends Component{
         const { name, handleNext } = this.props;
         let thisList = document.getElementById(`list_${name}`);
         thisList.addEventListener('scroll', (e) => {
-            if (thisList.scrollTop / (thisList.scrollHeight - thisList.clientHeight ) === 1) {
+            if (thisList.scrollTop / (thisList.scrollHeight - thisList.clientHeight ) > 0.9) {
                 handleNext(name);
             }
         });
