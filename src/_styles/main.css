@@ -92,7 +92,7 @@ h1 a {
     margin: 0;
     padding: 0;
     border: 0;
-    font-family: "ITC Kabel W01 Book";
+    font-family: "ITC Kabel W01 Book", "Open Sans, sans-serif";
     font-size: 30px;
     font-weight: 500;
     margin-top: 35px;
@@ -108,7 +108,7 @@ h1 a:hover {
 }
 
 #titlebar h2 {
-    font-family: "ITC Kabel W01 Book";
+    font-family: "ITC Kabel W01 Book", "Open Sans, sans-serif";
     font-size: 30px;
     font-weight: 400;
     margin-top: 35px;
@@ -122,7 +122,7 @@ h2 {
 }
 
 h3 {
-    font-family: "ITC Kabel W01 Book";
+    font-family: "ITC Kabel W01 Book", "Open Sans, sans-serif";
     font-size: 20px;
     color: #656565;
 }
