@@ -1,42 +1,47 @@
 import React, { Component } from 'react';
 import Param from '../_components/param';
 import logo from '../_assets/logo.jpg';
+import _ from 'lodash';
 
 class Page extends Component{
     constructor(props) {
         super(props);
         this.state = {
             params: {
-                sizeOne: { isFocused: false, value: '', placeholder: 'Outside diameter 1', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
-                sizeTwo: { isFocused: false, value: '', placeholder: 'Outside diameter 2', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
-                sizeThree: { isFocused: false, value: '', placeholder: 'Outside diameter 3', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
-                wtOne: { isFocused: false, value: '', placeholder: 'Wall thickness 1', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
-                wtTwo: { isFocused: false, value: '', placeholder: 'Wall thickness 2', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
-                type: { isFocused: false, value: '', placeholder: 'Article type', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'type', _length: 3 },
-                spec: { isFocused: false, value: '', placeholder: 'Specification', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'spec', _length: 3 },
-                grade: { isFocused: false, value: '', placeholder: 'Material grade', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'grade', _length: 3 },
-                heat: { isFocused: false, value: '', placeholder: 'Heat treatment', selection: { lunar: 'FF', name: ''}, options: [], hover: '', page: 0, path: 'heat', _length: 2 },
-                length: { isFocused: false, value: '', placeholder: 'Length', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'length', _length: 3 },
-                end: { isFocused: false, value: '', placeholder: 'Ends', selection: { lunar: 'FF', name: ''}, options: [], hover: '', page: 0, path: 'end', _length: 2 },
-                surface: { isFocused: false, value: '', placeholder: 'Surface treatment', selection: { lunar: 'FF', name: ''}, options: [], hover: '', page: 0, path: 'surface', _length: 2 },
-                cdi: { isFocused: false, value: '', placeholder: 'CDI', selection: { lunar: 'F', name: ''}, options: [], hover: '', page: 0, path: 'cdi', _length: 1 },
-                supplier: { isFocused: false, value: '', placeholder: 'Supplier', selection: { lunar: 'F', name: ''}, options: [], hover: '', page: 0, path: 'supplier', _length: 1 },
-                certificate: { isFocused: false, value: '', placeholder: 'Certificate', selection: { lunar: 'F', name: ''}, options: [], hover: '', page: 0, path: 'certificate', _length: 1 },
-                other: { isFocused: false, value: '', placeholder: 'Other', selection: { lunar: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'other', _length: 3 },
+                sizeOne: { value: '', placeholder: 'Outside diameter 1', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                sizeTwo: { value: '', placeholder: 'Outside diameter 2', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                sizeThree: { value: '', placeholder: 'Outside diameter 3', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                wtOne: { value: '', placeholder: 'Wall thickness 1', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                wtTwo: { value: '', placeholder: 'Wall thickness 2', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                type: { value: '', placeholder: 'Article type', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'type', _length: 3 },
+                spec: { value: '', placeholder: 'Specification', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'spec', _length: 3 },
+                grade: { value: '', placeholder: 'Material grade', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'grade', _length: 3 },
+                heat: { value: '', placeholder: 'Heat treatment', selection: { _id: 'FF', name: ''}, options: [], hover: '', page: 0, path: 'heat', _length: 2 },
+                length: { value: '', placeholder: 'Length', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'length', _length: 3 },
+                end: { value: '', placeholder: 'Ends', selection: { _id: 'FF', name: ''}, options: [], hover: '', page: 0, path: 'end', _length: 2 },
+                surface: { value: '', placeholder: 'Surface treatment', selection: { _id: 'FF', name: ''}, options: [], hover: '', page: 0, path: 'surface', _length: 2 },
+                cdi: { value: '', placeholder: 'CDI', selection: { _id: 'F', name: ''}, options: [], hover: '', page: 0, path: 'cdi', _length: 1 },
+                supplier: { value: '', placeholder: 'Supplier', selection: { _id: 'F', name: ''}, options: [], hover: '', page: 0, path: 'supplier', _length: 1 },
+                certificate: { value: '', placeholder: 'Certificate', selection: { _id: 'F', name: ''}, options: [], hover: '', page: 0, path: 'certificate', _length: 1 },
+                other: { value: '', placeholder: 'Other', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'other', _length: 3 },
             },
+            focused: '',
             loading: false,
             alert: {
                 type: '',
                 message: ''
             }
         }
+        this.clearFields = this.clearFields.bind(this);
         this.copyLunar = this.copyLunar.bind(this);
         this.handleGet = this.handleGet.bind(this);
         this.handleNext = this.handleNext.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onHover = this.onHover.bind(this);
+        this.toggleDropDown = this.toggleDropDown.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -72,38 +77,61 @@ class Page extends Component{
         document.removeEventListener("copy", listener);
     }
 
+    clearFields(event) {
+        event.preventDefault();
+        this.setState({
+            params: {
+                sizeOne: { value: '', placeholder: 'Outside diameter 1', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                sizeTwo: { value: '', placeholder: 'Outside diameter 2', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                sizeThree: { value: '', placeholder: 'Outside diameter 3', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                wtOne: { value: '', placeholder: 'Wall thickness 1', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                wtTwo: { value: '', placeholder: 'Wall thickness 2', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                type: { value: '', placeholder: 'Article type', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'type', _length: 3 },
+                spec: { value: '', placeholder: 'Specification', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'spec', _length: 3 },
+                grade: { value: '', placeholder: 'Material grade', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'grade', _length: 3 },
+                heat: { value: '', placeholder: 'Heat treatment', selection: { _id: 'FF', name: ''}, options: [], hover: '', page: 0, path: 'heat', _length: 2 },
+                length: { value: '', placeholder: 'Length', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'length', _length: 3 },
+                end: { value: '', placeholder: 'Ends', selection: { _id: 'FF', name: ''}, options: [], hover: '', page: 0, path: 'end', _length: 2 },
+                surface: { value: '', placeholder: 'Surface treatment', selection: { _id: 'FF', name: ''}, options: [], hover: '', page: 0, path: 'surface', _length: 2 },
+                cdi: { value: '', placeholder: 'CDI', selection: { _id: 'F', name: ''}, options: [], hover: '', page: 0, path: 'cdi', _length: 1 },
+                supplier: { value: '', placeholder: 'Supplier', selection: { _id: 'F', name: ''}, options: [], hover: '', page: 0, path: 'supplier', _length: 1 },
+                certificate: { value: '', placeholder: 'Certificate', selection: { _id: 'F', name: ''}, options: [], hover: '', page: 0, path: 'certificate', _length: 1 },
+                other: { value: '', placeholder: 'Other', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'other', _length: 3 },
+            },
+            focused: '',
+        });
+    }
+
     handleGet(key, page) {
-        const { params } = this.state;
-        // if (!!params[key].value && !loading) {
-            this.setState({
-                loading: true
-            }, () => {
-                const requestOptions = {
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json'},
-                };
-                return fetch(`https://lcg-server.herokuapp.com/${params[key].path}/find?name=${encodeURI(params[key].value)}&page=${encodeURI(page)}`, requestOptions) //https://lcg-server.herokuapp.com
-                .then(response => response.text().then(text => {
-                    this.setState({
-                        loading: false,
-                    }, () => {
-                        const data = text && JSON.parse(text);
-                        if (response.status === 200 && data.hasOwnProperty('options')) {
-                            this.setState({
-                                params: {
-                                    ...this.state.params,
-                                    [key]: {
-                                        ...this.state.params[key],
-                                        options: !this.state.params[key].isFocused ? [] : page !== 0 ? [...this.state.params[key].options, ...data.options] : data.options,
-                                        page
-                                    }
+        const { params, focused } = this.state;
+        this.setState({
+            loading: true
+        }, () => {
+            const requestOptions = {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+            };
+            return fetch(`https://lcg-server.herokuapp.com/${params[key].path}/find?name=${encodeURI(params[key].value)}&page=${encodeURI(page)}`, requestOptions) //https://lcg-server.herokuapp.com
+            .then(response => response.text().then(text => {
+                this.setState({
+                    loading: false,
+                }, () => {
+                    const data = text && JSON.parse(text);
+                    if (response.status === 200 && data.hasOwnProperty('options')) {
+                        this.setState({
+                            params: {
+                                ...this.state.params,
+                                [key]: {
+                                    ...this.state.params[key],
+                                    options: !_.isEqual(key, focused) ? [] : page !== 0 ? [...this.state.params[key].options, ...data.options] : data.options,
+                                    page
                                 }
-                            });
-                        }
-                    });
-                }));
-            });
-        // }
+                            }
+                        });
+                    }
+                });
+            }));
+        });
     }
 
     handleNext(key) {
@@ -130,10 +158,33 @@ class Page extends Component{
                 ...params,
                 [name]: {
                     ...params[name],
-                    value: value
+                    value: value,
+                    selection: {
+                        _id: 'F'.repeat(params[name]._length),
+                        name: ''
+                    }
                 }
             }
         }); 
+    }
+
+    handleSelect(event, name, selectionId, selectionName) {
+        event.preventDefault();
+        console.log(name, selectionId, selectionName);
+        event.preventDefault();
+        const { params } = this.state;
+        this.setState({
+            params: {
+                ...params,
+                [name]: {
+                    ...params[name],
+                    selection: {
+                        _id: selectionId,
+                        name: selectionName
+                    }
+                }
+            }, focused: ''
+        })
     }
 
     onFocus(event) {
@@ -145,28 +196,27 @@ class Page extends Component{
                 ...params,
                 [name]: {
                     ...params[name],
-                    isFocused: true
+                    options: [],
+                    value: params[name].selection.name
                 }
-            }
+            },
+            focused: name, //
         }, () => this.handleGet(name, 0));
-        
     }
 
     onBlur(event) {
         const { name } = event.target;
-        const { params } = this.state;
-        
-        this.setState({
-            params: {
-                ...params,
-                [name]: {
-                    ...params[name],
-                    isFocused: !!params[name].selection.name ? true : false,
-                    value: '',
-                    options: []
+        setTimeout(() => {
+            this.setState({
+                params: {
+                    ...this.state.params,
+                    [name]: {
+                        ...this.state.params[name],
+                        value: '',
+                    }
                 }
-            }
-        }); 
+            }); 
+        }, 1);
     }
 
     onHover(event, name, _id) {
@@ -183,8 +233,34 @@ class Page extends Component{
         });
     }
 
+    toggleDropDown(event, name) {
+        event.preventDefault();
+        const { params, focused } = this.state;
+        if (!!_.isEqual(focused, name) || !!params[name].selection.name) {
+            this.setState({
+                params: {
+                    ...params,
+                    [name]: {
+                        ...params[name],
+                        options: [],
+                        value: '',
+                        selection: {
+                            _id: 'F'.repeat(params[name]._length),
+                            name: ''
+                        }
+                    }
+                },
+                focused: '',
+            });
+        } else {
+            let myInput = document.getElementById(name);
+            myInput.focus();
+            myInput.select();
+        }
+    }
+
     render() {
-        const { params } = this.state;
+        const { params, focused } = this.state;
         return(
             <div style={{minHeight: '100vh'}}>
                 <header>
@@ -208,47 +284,42 @@ class Page extends Component{
                 <div id="titlebar">
                     <div className="container-xl titlebar-container">
                         <h2>Vlunar Code Generator</h2>
+                        
                     </div>
                 </div>
                 <div className="container-xl main-container">
                     <section>
                         <h3>Fields</h3>
+                        <div type="button" className="button-left" onClick={this.clearFields}>Clear</div>
                         <div className="row row-cols-1 row-cols-md-2">
                             {Object.keys(params).map(key => 
                                 <Param
                                     key={key}
                                     name={key}
                                     isFocused={params[key].isFocused}
+                                    focused={focused}
                                     value={params[key].value}
                                     placeholder={params[key].placeholder}
-                                    // selection={params[key].selection}
+                                    selection={params[key].selection}
                                     options={params[key].options}
                                     hover={this.state.params[key].hover}
                                     page={params[key].page}
-                                    // path={params[key].path}
-                                    // _length={params[key]._length}
                                     onChange={this.handleChange}
                                     handleNext={this.handleNext}
+                                    handleSelect={this.handleSelect}
                                     onFocus={this.onFocus}
                                     onBlur={this.onBlur}
                                     onHover={this.onHover}
+                                    toggleDropDown={this.toggleDropDown}
                                 />
                             )}
                         </div>
                     </section>
                     <section>
                         <h3>Vlunar</h3>
-                        <div className="result-section">
-                            <div className="row" style={{margin: '0px', padding: '0px', height: '19.5px'}}>
-                                <div className="col" style={{margin: '0px', padding: '0px', height: '19.5px'}}>
-                                    <pre id="pre">{`${Object.keys(params).map(key => params[key].selection.lunar).join('')}1`}</pre>
-                                </div>
-                                <div className="col" style={{margin: '0px', padding: '0px', height: '19.5px'}}>
-                                    <div type="button" className="float-right" style={{height: '19.5px', fontSize: '13.6px'}} onClick={this.copyLunar}>Copy</div>
-                                </div>
-                            </div>
-                            
-                            
+                        <div type="button" className="button-left" onClick={this.copyLunar}>Copy</div>
+                        <div className="result-area">
+                            <pre id="pre">{`${Object.keys(params).map(key => params[key].selection._id).join('')}1`}</pre>
                         </div>
                     </section>
                     {/* <section>

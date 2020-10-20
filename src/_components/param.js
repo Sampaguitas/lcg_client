@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import _ from 'lodash';
 import '../_styles/main.css';
@@ -17,40 +17,40 @@ class Param extends Component{
     }
 
     render() {
-        const { name, isFocused, value, placeholder, onChange, onFocus, onBlur, onHover, options, hover } = this.props;
+        const { name, focused, value, placeholder, onChange, onFocus, onBlur, onHover, options, hover, selection, handleSelect, toggleDropDown } = this.props;
         return(
             <div className="col">
-                {/* <div className="mdb-input"> */}
-                    {/* <label className="text"> */}
-                        <label className={isFocused ? "small" : ""} htmlFor={name}>{placeholder}</label> 
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                id={name} name={name}
-                                value={value}
-                                // placeholder={placeholder}
-                                onChange={onChange}
-                                onFocus={onFocus}
-                                onBlur={onBlur}
-                            />
-                            <div className="mdb-icon">
-                                <svg><FontAwesomeIcon icon={faChevronDown} /></svg>
-                            </div>
-                            <ul id={`list_${name}`} className={!_.isEmpty(options) ? "visible" : ""}>
-                                {options.map((option, index) =>
-                                    <li
-                                        key={index}
-                                        onMouseEnter={event => onHover(event, name, option._id)}
-                                        className={option._id === hover ? "selected" : ""}
-                                    >
-                                        {option.name}
-                                    </li>
-                                )}
-                            </ul>
-                        </div>
-                    {/* </label> */}
-                {/* </div> */}
+                <label className={_.isEqual(focused, name) || !!selection.name ? "small" : ""} htmlFor={name}>{placeholder}</label>
+                <p hidden={!!_.isEqual(focused, name) || selection.name === ''}>{selection.name}</p>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        id={name}
+                        name={name}
+                        value={value}
+                        onChange={onChange}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                    />
+                    <div type="button" className="mdb-icon" onClick={event => toggleDropDown(event, name)}>
+                        <svg><FontAwesomeIcon icon={!!_.isEqual(focused, name) || !!selection.name ? faTimes : faChevronDown} /></svg>
+                    </div>
+                    <ul id={`list_${name}`} className={!_.isEmpty(options) && _.isEqual(focused, name) ? "visible" : ""}>
+                        {options.map((option, index) =>
+                            <li
+                                key={index}
+                                type="button"
+                                onMouseEnter={event => onHover(event, name, option._id)}
+                                onClick={event => handleSelect(event, name, option._id, option.name)}
+                                className={option._id === hover ? "selected" : ""}
+                                // selected={option._id === hover ? "selected" : ""}
+                            >
+                                {option.name}
+                            </li>
+                        )}
+                    </ul>
+                </div>
             </div>
             
         );

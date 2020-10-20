@@ -151,10 +151,15 @@ h3 {
     align-items: center;
     height: 38px;
     width: 38px;
-    z-index: 2;
-    pointer-events: none;
+    /* z-index: 2; */
+    /* pointer-events: none; */
     cursor: pointer;
 }
+
+.mdb-icon_close {
+    z-index: 2;
+}
+
 
 svg {
     --size: var(--icon-size, 24px);
@@ -170,6 +175,17 @@ svg:not(:root) {
 ul.visible {
     opacity: 1;
     pointer-events: auto;
+}
+
+p {
+    z-index:2;
+    pointer-events:none;
+    position:absolute;
+    left:23px;
+    padding:0 5px;
+    margin:0;
+    line-height:38px;
+    color: #656565;
 }
 
 label {
@@ -252,8 +268,21 @@ li {
     padding: 0px 0px 0px 14px;
 }
 
+section {
+    position: relative;
+}
 
-.result-section {
+.button-left {
+    position:absolute;
+    top: 15px;
+    right: 15px;
+    font-family: "ITC Kabel W01 Book";
+    color: #a3000d;
+    z-index: 1;
+    font-size: 16px;
+}
+
+.result-area {
     height: 51.5px;
     padding: 16px;
     width: 100%;
@@ -262,10 +291,13 @@ li {
 }
 
 pre {
+    display: block;
     margin: 0px;
     font-family: "ITC Kabel W01 Book";
     line-height: 1.45;
     font-size: 85%;
     color: #656565;
 }
+
+
 
