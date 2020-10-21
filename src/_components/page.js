@@ -330,20 +330,20 @@ class Page extends Component{
                     <section>
                         <h3>Encoding standards</h3>
                         <div className="list-group">
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Bars++Cylinders.pdf" target="_blank" rel="noopener noreferrer">Bars Cylinders</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Blind+flanges.pdf" target="_blank" rel="noopener noreferrer">Blind flanges</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Elbows.pdf" target="_blank" rel="noopener noreferrer">Elbows</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Fittings.pdf" target="_blank" rel="noopener noreferrer">Fittings</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Flat+welding+flanges.pdf" target="_blank" rel="noopener noreferrer">Flat welding flanges</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Hollow+sections.pdf" target="_blank" rel="noopener noreferrer">Hollow sections</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Reducers.pdf" target="_blank" rel="noopener noreferrer">Reducers</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Sizes.pdf" target="_blank" rel="noopener noreferrer">Sizes</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Socket+Weld+flanges.pdf" target="_blank" rel="noopener noreferrer">Socket Weld flanges</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Tees.pdf" target="_blank" rel="noopener noreferrer">Tees</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Threaded+flanges.pdf" target="_blank" rel="noopener noreferrer">Threaded flanges</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Tubes+ANSI.pdf" target="_blank" rel="noopener noreferrer">Tubes ANSI</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Tubes+EN.pdf" target="_blank" rel="noopener noreferrer">Tubes EN</a>
-                            <a className="list-group-item list-group-item-action" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Welding+Neck+flanges.pdf" target="_blank" rel="noopener noreferrer">Welding Neck flanges</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Bars++Cylinders.pdf" target="_blank" rel="noopener noreferrer">Bars Cylinders</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Blind+flanges.pdf" target="_blank" rel="noopener noreferrer">Blind flanges</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Elbows.pdf" target="_blank" rel="noopener noreferrer">Elbows</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Fittings.pdf" target="_blank" rel="noopener noreferrer">Fittings</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Flat+welding+flanges.pdf" target="_blank" rel="noopener noreferrer">Flat welding flanges</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Hollow+sections.pdf" target="_blank" rel="noopener noreferrer">Hollow sections</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Reducers.pdf" target="_blank" rel="noopener noreferrer">Reducers</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Sizes.pdf" target="_blank" rel="noopener noreferrer">Sizes</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Socket+Weld+flanges.pdf" target="_blank" rel="noopener noreferrer">Socket Weld flanges</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Tees.pdf" target="_blank" rel="noopener noreferrer">Tees</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Threaded+flanges.pdf" target="_blank" rel="noopener noreferrer">Threaded flanges</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Tubes+ANSI.pdf" target="_blank" rel="noopener noreferrer">Tubes ANSI</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Tubes+EN.pdf" target="_blank" rel="noopener noreferrer">Tubes EN</a>
+                            <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Welding+Neck+flanges.pdf" target="_blank" rel="noopener noreferrer">Welding Neck flanges</a>
                         </div>
                     </section>
                     
