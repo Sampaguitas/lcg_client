@@ -186,6 +186,8 @@ class Page extends Component{
                 }
             }, focused: ''
         })
+        let myInput = document.getElementById(name);
+        myInput.blur();
     }
 
     onFocus(event) {
