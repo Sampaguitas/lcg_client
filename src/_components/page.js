@@ -43,6 +43,117 @@ class Page extends Component{
         this.toggleDropDown = this.toggleDropDown.bind(this);
     }
 
+    componentDidMount() {
+        const { params } = this.state;
+        const fields = document.getElementById('fields');
+        fields.addEventListener("keydown", event => {
+            if (Object.keys(params).includes(event.target.id)) {
+                let name = event.target.id;
+                switch(event.key) {
+                    case "ArrowDown":
+                        if (!_.isEmpty(this.state.params[name].options)) {
+                            let selectedIndex = this.state.params[name].options.findIndex(element => _.isEqual(element._id, this.state.params[name].hover));
+                            if (selectedIndex === -1) {
+                                this.setState({
+                                    params: {
+                                        ...this.state.params,
+                                        [name]: {
+                                            ...this.state.params[name],
+                                            selection: {
+                                                _id: this.state.params[name].options[0]._id,
+                                                name: this.state.params[name].options[0].name
+                                            },
+                                            hover: this.state.params[name].options[0]._id
+                                        }
+                                    },
+                                });
+                            } else if (selectedIndex < this.state.params[name].options.length - 1) {
+                                this.setState({
+                                    params: {
+                                        ...this.state.params,
+                                        [name]: {
+                                            ...this.state.params[name],
+                                            selection: {
+                                                _id: this.state.params[name].options[selectedIndex + 1]._id,
+                                                name: this.state.params[name].options[selectedIndex + 1].name
+                                            },
+                                            hover: this.state.params[name].options[selectedIndex + 1]._id
+                                        }
+                                    },
+                                });
+                            }
+                        }
+                        break;
+                    case "ArrowUp":
+                        if (!_.isEmpty(this.state.params[name].options)) {
+                            let selectedIndex = this.state.params[name].options.findIndex(element => _.isEqual(element._id, this.state.params[name].hover));
+                        if (selectedIndex > 0) {
+                                this.setState({
+                                    params: {
+                                        ...this.state.params,
+                                        [name]: {
+                                            ...this.state.params[name],
+                                            selection: {
+                                                _id: this.state.params[name].options[selectedIndex - 1]._id,
+                                                name: this.state.params[name].options[selectedIndex - 1].name
+                                            },
+                                            hover: this.state.params[name].options[selectedIndex - 1]._id
+                                        }
+                                    },
+                                });
+                            }
+                        }
+                        break;
+                    case "Enter":
+                        let selected = this.state.params[name].options.find(element => _.isEqual(element._id, this.state.params[name].hover));
+                        if (!_.isUndefined(selected)) {
+                            this.setState({
+                                params: {
+                                    ...this.state.params,
+                                    [name]: {
+                                        ...this.state.params[name],
+                                        options: [],
+                                        value: '',
+                                        selection: {
+                                            _id: selected._id,
+                                            name: selected.name
+                                        },
+                                        hover: ''
+                                    }
+                                },
+                                focused: '',
+                            });
+                            let myInput = document.getElementById(name);
+                            myInput.blur();
+                        }
+                        break;
+                    case "Escape":
+                        this.setState({
+                            params: {
+                                ...this.state.params,
+                                [name]: {
+                                    ...this.state.params[name],
+                                    options: [],
+                                    value: '',
+                                    selection: {
+                                        _id: 'F'.repeat(this.state.params[name]._length),
+                                        name: ''
+                                    },
+                                    hover: '',
+                                }
+                            },
+                            focused: '',
+                        });
+                        let myInput = document.getElementById(name);
+                        myInput.blur();
+                        break;
+                    default: // do nothing;
+                        break;
+                }
+            }
+        });
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (this.state.params.sizeOne.value !== prevState.params.sizeOne.value) this.handleGet('sizeOne', 0);
         if (this.state.params.sizeTwo.value !== prevState.params.sizeTwo.value) this.handleGet('sizeTwo', 0);
@@ -102,7 +213,7 @@ class Page extends Component{
     }
 
     handleGet(key, page) {
-        const { params, focused } = this.state;
+        const { focused } = this.state;
         this.setState({
             loading: true
         }, () => {
@@ -110,7 +221,7 @@ class Page extends Component{
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
             };
-            return fetch(`https://lcg-server.herokuapp.com/${params[key].path}/find?name=${encodeURI(params[key].value)}&page=${encodeURI(page)}`, requestOptions)
+            return fetch(`https://lcg-server.herokuapp.com/${this.state.params[key].path}/find?name=${encodeURI(this.state.params[key].value)}&page=${encodeURI(page)}`, requestOptions)
             .then(response => response.text().then(text => {
                 this.setState({
                     loading: false,
@@ -150,39 +261,36 @@ class Page extends Component{
     handleChange(event) {
         event.preventDefault();
         const { name, value } = event.target;
-        const { params } = this.state;
 
         this.setState({
             params: {
-                ...params,
+                ...this.state.params,
                 [name]: {
-                    ...params[name],
+                    ...this.state.params[name],
                     value: value,
                     selection: {
-                        _id: 'F'.repeat(params[name]._length),
+                        _id: 'F'.repeat(this.state.params[name]._length),
                         name: ''
                     }
                 }
             }
-        }); 
+        });
     }
 
     handleSelect(event, name, selectionId, selectionName) {
         event.preventDefault();
-        console.log(name, selectionId, selectionName);
-        event.preventDefault();
-        const { params } = this.state;
         this.setState({
             params: {
-                ...params,
+                ...this.state.params,
                 [name]: {
-                    ...params[name],
+                    ...this.state.params[name],
                     value: '',
                     options: [],
                     selection: {
                         _id: selectionId,
                         name: selectionName
-                    }
+                    },
+                    hover: '',
                 }
             }, focused: ''
         })
@@ -192,32 +300,35 @@ class Page extends Component{
 
     onFocus(event) {
         const { name } = event.target;
-        const { params, focused } = this.state;
+        const { focused } = this.state;
         if (!!focused) {
             this.setState({
                 params: {
-                    ...params,
+                    ...this.state.params,
                     [name]: {
-                        ...params[name],
+                        ...this.state.params[name],
                         options: [],
-                        value: params[name].selection.name
+                        value: this.state.params[name].selection.name,
+                        hover: ''
                     },
                     [focused]: {
-                       ...params[focused],
+                       ...this.state.params[focused],
                        options: [],
                        value: '',
-                    }
+                       hover: ''
+                    },
                 },
                 focused: name, //
             }, () => this.handleGet(name, 0));
         } else {
             this.setState({
                 params: {
-                    ...params,
+                    ...this.state.params,
                     [name]: {
-                        ...params[name],
+                        ...this.state.params[name],
                         options: [],
-                        value: params[name].selection.name
+                        value: this.state.params[name].selection.name,
+                        hover: ''
                     }
                 },
                 focused: name,
@@ -227,12 +338,11 @@ class Page extends Component{
 
     onHover(event, name, _id) {
         event.preventDefault();
-        const { params } = this.state;
         this.setState({
             params: {
-                ...params,
+                ...this.state.params,
                 [name]: {
-                    ...params[name],
+                    ...this.state.params[name],
                     hover: _id
                 }
             }
@@ -253,11 +363,14 @@ class Page extends Component{
                         selection: {
                             _id: 'F'.repeat(params[name]._length),
                             name: ''
-                        }
+                        },
+                        hover: ''
                     }
                 },
                 focused: '',
             });
+            let myInput = document.getElementById(name);
+            myInput.blur();
         } else {
             let myInput = document.getElementById(name);
             myInput.focus();
@@ -294,7 +407,7 @@ class Page extends Component{
                     </div>
                 </div>
                 <div className="container-xl main-container">
-                    <section>
+                    <section id="fields">
                         <h3>Fields</h3>
                         <div type="button" className="button-left" onClick={this.clearFields}>Clear</div>
                         <div className="row row-cols-1 row-cols-md-2">
