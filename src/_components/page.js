@@ -39,7 +39,6 @@ class Page extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
         this.onHover = this.onHover.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
     }
@@ -189,34 +188,37 @@ class Page extends Component{
 
     onFocus(event) {
         const { name } = event.target;
-        const { params } = this.state;
-        
-        this.setState({
-            params: {
-                ...params,
-                [name]: {
-                    ...params[name],
-                    options: [],
-                    value: params[name].selection.name
-                }
-            },
-            focused: name, //
-        }, () => this.handleGet(name, 0));
-    }
-
-    onBlur(event) {
-        const { name } = event.target;
-        setTimeout(() => {
+        const { params, focused } = this.state;
+        if (!!focused) {
             this.setState({
                 params: {
-                    ...this.state.params,
+                    ...params,
                     [name]: {
-                        ...this.state.params[name],
-                        value: '',
+                        ...params[name],
+                        options: [],
+                        value: params[name].selection.name
+                    },
+                    [focused]: {
+                       ...params[focused],
+                       options: [],
+                       value: '',
                     }
-                }
-            }); 
-        }, 1);
+                },
+                focused: name, //
+            }, () => this.handleGet(name, 0));
+        } else {
+            this.setState({
+                params: {
+                    ...params,
+                    [name]: {
+                        ...params[name],
+                        options: [],
+                        value: params[name].selection.name
+                    }
+                },
+                focused: name,
+            }, () => this.handleGet(name, 0));
+        }
     }
 
     onHover(event, name, _id) {
@@ -308,7 +310,6 @@ class Page extends Component{
                                     handleNext={this.handleNext}
                                     handleSelect={this.handleSelect}
                                     onFocus={this.onFocus}
-                                    onBlur={this.onBlur}
                                     onHover={this.onHover}
                                     toggleDropDown={this.toggleDropDown}
                                 />

@@ -294,8 +294,10 @@ pre {
     display: block;
     margin: 0px;
     font-family: "ITC Kabel W01 Book";
-    line-height: 1.45;
-    font-size: 85%;
+    /* line-height: 1.45; */
+    /* font-size: 85%; */
+    /* font-size: 16px; */
+    /* letter-spacing: 0.5px; */
     color: #656565;
 }
 

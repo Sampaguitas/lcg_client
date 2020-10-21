@@ -17,7 +17,7 @@ class Param extends Component{
     }
 
     render() {
-        const { name, focused, value, placeholder, onChange, onFocus, onBlur, onHover, options, hover, selection, handleSelect, toggleDropDown } = this.props;
+        const { name, focused, value, placeholder, onChange, onFocus, onHover, options, hover, selection, handleSelect, toggleDropDown } = this.props;
         return(
             <div className="col">
                 <label className={_.isEqual(focused, name) || !!selection.name ? "small" : ""} htmlFor={name}>{placeholder}</label>
@@ -31,7 +31,6 @@ class Param extends Component{
                         value={value}
                         onChange={onChange}
                         onFocus={onFocus}
-                        onBlur={onBlur}
                     />
                     <div type="button" className="mdb-icon" onClick={event => toggleDropDown(event, name)}>
                         <svg><FontAwesomeIcon icon={!!_.isEqual(focused, name) || !!selection.name ? faTimes : faChevronDown} /></svg>
@@ -44,7 +43,7 @@ class Param extends Component{
                                 onMouseEnter={event => onHover(event, name, option._id)}
                                 onClick={event => handleSelect(event, name, option._id, option.name)}
                                 className={option._id === hover ? "selected" : ""}
-                                // selected={option._id === hover ? "selected" : ""}
+                                selected={option._id === hover ? "selected" : ""}
                             >
                                 {option.name}
                             </li>
