@@ -177,6 +177,8 @@ class Page extends Component{
                 ...params,
                 [name]: {
                     ...params[name],
+                    value: '',
+                    options: [],
                     selection: {
                         _id: selectionId,
                         name: selectionName

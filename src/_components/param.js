@@ -35,14 +35,14 @@ class Param extends Component{
                     <div type="button" className="mdb-icon" onClick={event => toggleDropDown(event, name)}>
                         <svg><FontAwesomeIcon icon={!!_.isEqual(focused, name) || !!selection.name ? faTimes : faChevronDown} /></svg>
                     </div>
-                    <ul id={`list_${name}`} className={!_.isEmpty(options) && _.isEqual(focused, name) ? "visible" : ""}>
+                    <ul id={`list_${name}`} className={!_.isEmpty(options) && _.isEqual(focused, name) ? "ul_visible" : "ul"}>
                         {options.map((option, index) =>
                             <li
                                 key={index}
                                 type="button"
                                 onMouseEnter={event => onHover(event, name, option._id)}
                                 onClick={event => handleSelect(event, name, option._id, option.name)}
-                                className={option._id === hover ? "selected" : ""}
+                                className={option._id === hover ? "li_selected" : "li"}
                                 selected={option._id === hover ? "selected" : ""}
                             >
                                 {option.name}
