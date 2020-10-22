@@ -21,7 +21,7 @@ class Param extends Component{
         return(
             <div className="col">
                 <label className={_.isEqual(focused, name) || !!selection.name ? "small" : ""} htmlFor={name}>{placeholder}</label>
-                <p hidden={!!_.isEqual(focused, name) || selection.name === ''}>{selection.name}</p>
+                <p hidden={!!_.isEqual(focused, name) || selection.name === ''}><span className="option-id">{selection._id}</span>{selection.name}</p>
                 <div className="form-group">
                     <input
                         type="text"

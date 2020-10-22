@@ -182,7 +182,7 @@ p {
     padding:0 5px;
     margin:0;
     line-height:38px;
-    color: #656565;
+    /* color: #656565; */
 }
 
 label {
