@@ -45,7 +45,7 @@ class Param extends Component{
                                 className={option._id === hover ? "li_selected" : "li"}
                                 selected={option._id === hover ? "selected" : ""}
                             >
-                                {option.name}
+                                <span className="option-id">{option._id}</span>{option.name}
                             </li>
                         )}
                     </ul>
