@@ -439,6 +439,9 @@ class Page extends Component{
                         <div className="result-area">
                             <pre id="pre">{`${Object.keys(params).map(key => params[key].selection._id).join('')}1`}</pre>
                         </div>
+                        <div className="result-area mt-3">
+                            <pre id="pre">{`${Object.keys(params).map(key => key !== 'cdi' && params[key].selection.name !== '' ? ['sizeTwo', 'sizeThree', 'wtOne', 'wtTwo'].includes(key) ? `x ${params[key].selection.name.split(' | ')[0]}` : params[key].selection.name.split(' | ')[0] : '').filter(n => n).join(' ')}`}</pre>
+                        </div>
                     </section>
                     <section>
                         <h3>Encoding standards</h3>
