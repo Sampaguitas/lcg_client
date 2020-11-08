@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Param from '../_components/param';
 import logo from '../_assets/logo.jpg';
 import _ from 'lodash';
@@ -25,6 +27,8 @@ class Page extends Component{
                 certificate: { value: '', placeholder: 'Certificate', selection: { _id: 'F', name: ''}, options: [], hover: '', page: 0, path: 'certificate', _length: 1 },
                 other: { value: '', placeholder: 'Other', selection: { _id: 'FFF', name: ''}, options: [], hover: '', page: 0, path: 'other', _length: 3 },
             },
+            lunar: '',
+            feedback: '',
             focused: '',
             loading: false,
             alert: {
@@ -34,11 +38,16 @@ class Page extends Component{
         }
         this.clearFields = this.clearFields.bind(this);
         this.copyLunar = this.copyLunar.bind(this);
+        // this.copyDescription = this.copyDescription.bind(this);
+        this.handleTranslate = this.handleTranslate.bind(this);
         this.handleGet = this.handleGet.bind(this);
         this.handleNext = this.handleNext.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeTranslate = this.handleChangeTranslate.bind(this);
+        this.handleClearTranslate = this.handleClearTranslate.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.onFocus = this.onFocus.bind(this);
+        this.onFocusTemplate = this.onFocusTemplate.bind(this);
         this.onHover = this.onHover.bind(this);
         this.toggleDropDown = this.toggleDropDown.bind(this);
     }
@@ -176,7 +185,6 @@ class Page extends Component{
     copyLunar(event) {
         event.preventDefault();
         let pre = document.getElementById("pre").innerHTML;
-        console.log(pre);
         function listener(e) {
             e.clipboardData.setData("text/html", pre);
             e.clipboardData.setData("text/plain", pre);
@@ -185,6 +193,58 @@ class Page extends Component{
         document.addEventListener("copy", listener);
         document.execCommand("copy");
         document.removeEventListener("copy", listener);
+    }
+
+    // copyDescription(event) {
+    //     event.preventDefault();
+    // }
+
+    handleTranslate(event) {
+        event.preventDefault();
+        const { lunar } = this.state;
+        this.setState({
+            loading: true
+        }, () => {
+            const requestOptions = {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+            };
+            return fetch(`https://lcg-server.herokuapp.com/lunar/translate?lunar=${encodeURI(lunar)}`, requestOptions)
+            .then(response => response.text().then(text => {
+                this.setState({
+                    loading: false,
+                }, () => {
+                    const data = text && JSON.parse(text);
+                    if (response.status === 200) {
+                        this.setState({
+                            params: {
+                                sizeOne: { value: '', placeholder: 'Outside diameter 1', selection: { _id: data.sizeOne._id, name: data.sizeOne.name}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                                sizeTwo: { value: '', placeholder: 'Outside diameter 2', selection: { _id: data.sizeTwo._id, name: data.sizeTwo.name}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                                sizeThree: { value: '', placeholder: 'Outside diameter 3', selection: { _id: data.sizeThree._id, name: data.sizeThree.name}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                                wtOne: { value: '', placeholder: 'Wall thickness 1', selection: { _id: data.wtOne._id, name: data.wtOne.name}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                                wtTwo: { value: '', placeholder: 'Wall thickness 2', selection: { _id: data.wtTwo._id, name: data.wtTwo.name}, options: [], hover: '', page: 0, path: 'size', _length: 3 },
+                                type: { value: '', placeholder: 'Article type', selection: { _id: data.type._id, name: data.type.name}, options: [], hover: '', page: 0, path: 'type', _length: 3 },
+                                spec: { value: '', placeholder: 'Specification', selection: { _id: data.spec._id, name: data.spec.name}, options: [], hover: '', page: 0, path: 'spec', _length: 3 },
+                                grade: { value: '', placeholder: 'Material grade', selection: { _id: data.grade._id, name: data.grade.name}, options: [], hover: '', page: 0, path: 'grade', _length: 3 },
+                                heat: { value: '', placeholder: 'Heat treatment', selection: { _id: data.heat._id, name: data.heat.name}, options: [], hover: '', page: 0, path: 'heat', _length: 2 },
+                                length: { value: '', placeholder: 'Length', selection: { _id: data.length._id, name: data.length.name}, options: [], hover: '', page: 0, path: 'length', _length: 3 },
+                                end: { value: '', placeholder: 'Ends', selection: { _id: data.end._id, name: data.end.name}, options: [], hover: '', page: 0, path: 'end', _length: 2 },
+                                surface: { value: '', placeholder: 'Surface treatment', selection: { _id: data.surface._id, name: data.surface.name}, options: [], hover: '', page: 0, path: 'surface', _length: 2 },
+                                cdi: { value: '', placeholder: 'CDI', selection: { _id: data.cdi._id, name: data.cdi.name}, options: [], hover: '', page: 0, path: 'cdi', _length: 1 },
+                                supplier: { value: '', placeholder: 'Supplier', selection: { _id: data.supplier._id, name: data.supplier.name}, options: [], hover: '', page: 0, path: 'supplier', _length: 1 },
+                                certificate: { value: '', placeholder: 'Certificate', selection: { _id: data.certificate._id, name: data.certificate.name}, options: [], hover: '', page: 0, path: 'certificate', _length: 1 },
+                                other: { value: '', placeholder: 'Other', selection: { _id: data.other._id, name: data.other.name}, options: [], hover: '', page: 0, path: 'other', _length: 3 },
+                            },
+                            feedback: '',
+                            focused: ''
+                        });
+                    } else if (data.hasOwnProperty('message')) {
+                        console.log(data.message);
+                        this.setState({feedback: data.message});
+                    }
+                });
+            }));
+        });
     }
 
     clearFields(event) {
@@ -277,6 +337,23 @@ class Page extends Component{
         });
     }
 
+    handleChangeTranslate(event) {
+        event.preventDefault();
+        this.setState({
+            lunar: event.target.value,
+            feedback: ''
+        });
+    }
+
+    handleClearTranslate(event) {
+        event.preventDefault();
+        this.setState({
+            lunar: '',
+            focused: '',
+            feedback: ''
+        });
+    }
+
     handleSelect(event, name, selectionId, selectionName) {
         event.preventDefault();
         this.setState({
@@ -301,7 +378,7 @@ class Page extends Component{
     onFocus(event) {
         const { name } = event.target;
         const { focused } = this.state;
-        if (!!focused) {
+        if (!!focused && focused !== 'lunar') {
             this.setState({
                 params: {
                     ...this.state.params,
@@ -333,6 +410,27 @@ class Page extends Component{
                 },
                 focused: name,
             }, () => this.handleGet(name, 0));
+        }
+    }
+
+    onFocusTemplate(event) {
+        event.preventDefault();
+        const { focused } = this.state;
+        if (!!focused && focused !== 'lunar') {
+            this.setState({
+                params: {
+                    ...this.state.params,
+                    [focused]: {
+                       ...this.state.params[focused],
+                       options: [],
+                       value: '',
+                       hover: ''
+                    },
+                },
+                focused: 'lunar', //
+            });
+        } else {
+            this.setState({focused: 'lunar'});
         }
     }
 
@@ -379,7 +477,7 @@ class Page extends Component{
     }
 
     render() {
-        const { params, focused } = this.state;
+        const { params, focused, lunar, feedback } = this.state;
         return(
             <div style={{minHeight: '100vh'}}>
                 <header>
@@ -403,10 +501,36 @@ class Page extends Component{
                 <div id="titlebar">
                     <div className="container-xl titlebar-container">
                         <h2>Vlunar Code Generator</h2>
-                        
                     </div>
                 </div>
                 <div className="container-xl main-container">
+                    <section>
+                        <h3>Translate</h3>
+                        <div type="button" className="button-left" onClick={event => this.handleTranslate(event)}>Submit</div>
+                        <div className="row">
+                            <div className="col">
+                                <label className={_.isEqual(focused, "lunar") || !!lunar ? "small" : ""} htmlFor="lunar">Vlunar</label>
+                                <div className="form-group" style={feedback ? {marginBottom: '0px'} : {marginBottom: '16px'}}>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id='lunar'
+                                        name='lunar'
+                                        value={lunar}
+                                        onChange={this.handleChangeTranslate}
+                                        onFocus={this.onFocusTemplate}
+                                        aria-describedby="feedback"
+                                    />
+                                    {lunar && 
+                                        <div type="button" className="mdb-icon" onClick={event => this.handleClearTranslate(event)}>
+                                            <svg><FontAwesomeIcon icon={faTimes} /></svg>
+                                        </div>
+                                    }
+                                    {feedback && <small id="feedback" className="form-text text-danger">{feedback}</small>}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     <section id="fields">
                         <h3>Fields</h3>
                         <div type="button" className="button-left" onClick={this.clearFields}>Clear</div>
@@ -434,18 +558,18 @@ class Page extends Component{
                         </div>
                     </section>
                     <section>
-                        <h3>Vlunar</h3>
+                        <h3>Result</h3>
                         <div type="button" className="button-left" onClick={this.copyLunar}>Copy</div>
                         <div className="result-area">
                             <pre id="pre">{`${Object.keys(params).map(key => params[key].selection._id).join('')}1`}</pre>
                         </div>
-                        <div className="result-area mt-3">
+                        <div className="result-area">
                             <pre id="pre">{`${Object.keys(params).map(key => key !== 'cdi' && params[key].selection.name !== '' ? ['sizeTwo', 'sizeThree', 'wtOne', 'wtTwo'].includes(key) ? `x ${params[key].selection.name.split(' | ')[0]}` : params[key].selection.name.split(' | ')[0] : '').filter(n => n).join(' ')}`}</pre>
                         </div>
                     </section>
                     <section>
                         <h3>Encoding standards</h3>
-                        <div className="list-group">
+                        <div className="list-group" style={{marginBottom: '16px'}}>
                             <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Bars++Cylinders.pdf" target="_blank" rel="noopener noreferrer">Bars Cylinders</a>
                             <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Blind+flanges.pdf" target="_blank" rel="noopener noreferrer">Blind flanges</a>
                             <a className="list-group-item list-group-item-action py-2" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Elbows.pdf" target="_blank" rel="noopener noreferrer">Elbows</a>

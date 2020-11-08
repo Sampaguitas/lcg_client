@@ -316,14 +316,16 @@ section {
 }
 
 .result-area {
-    height: 51.5px;
-    padding: 16px;
+    height: 48px;
+    padding: 12px;
+    margin-bottom: 16px;
     width: 100%;
     border-radius: 6px;
     background-color:rgb(246,248,250);
 }
 
 pre {
+    height: 21px;
     display: block;
     margin: 0px;
     font-family: "ITC Kabel W01 Book";
