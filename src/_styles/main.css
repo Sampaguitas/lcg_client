@@ -341,3 +341,19 @@ span.option-id {
     font-family: "ITC Kabel W01 Book";
     color: #656565;
 }
+
+.nav-link {
+    font-family: "ITC Kabel W01 Book";
+    font-size: 24px;
+    color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+    height: 100%;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+.nav-link:hover {
+    color: white;
+    background-color: rgb(139,5,39);
+}

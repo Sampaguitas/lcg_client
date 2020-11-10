@@ -494,8 +494,20 @@ class Page extends Component{
                         </div>
                     </div>
                     <div className="bottom-nav">
-                        {/* <div className="container-xl">
-                        </div> */}
+                        <div className="container-xl" style={{height: '100%'}}>
+                            <ul className="nav" style={{height: '100%'}}>
+                                <li className="nav-item">
+                                    <a
+                                        className="nav-link"
+                                        href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/Vlunar+code+generatior+User+Manual+version+01.pdf"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        User Manual
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </header>
                 <div id="titlebar">
