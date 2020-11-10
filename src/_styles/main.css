@@ -344,13 +344,16 @@ span.option-id {
 
 .nav-link {
     font-family: "ITC Kabel W01 Book";
-    font-size: 24px;
+    font-size: 17px;
     color: white;
+    padding-top: 18px;
     padding-left: 25px;
     padding-right: 25px;
     height: 100%;
     border-left: 1px solid white;
     border-right: 1px solid white;
+    
+    
 }
 
 .nav-link:hover {
