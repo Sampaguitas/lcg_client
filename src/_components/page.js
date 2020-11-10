@@ -31,6 +31,7 @@ class Page extends Component{
             feedback: '',
             focused: '',
             loading: false,
+            // expanded: false,
             alert: {
                 type: '',
                 message: ''
@@ -506,6 +507,25 @@ class Page extends Component{
                                         User Manual
                                     </a>
                                 </li>
+                                {/* <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Encoding Standards</a>
+                                    <div className="dropdown-menu" style={{display: "block", width: '100%'}}>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Bars++Cylinders.pdf" target="_blank" rel="noopener noreferrer">Bars Cylinders</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Blind+flanges.pdf" target="_blank" rel="noopener noreferrer">Blind flanges</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Elbows.pdf" target="_blank" rel="noopener noreferrer">Elbows</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Fittings.pdf" target="_blank" rel="noopener noreferrer">Fittings</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Flat+welding+flanges.pdf" target="_blank" rel="noopener noreferrer">Flat welding flanges</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Hollow+sections.pdf" target="_blank" rel="noopener noreferrer">Hollow sections</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Reducers.pdf" target="_blank" rel="noopener noreferrer">Reducers</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Sizes.pdf" target="_blank" rel="noopener noreferrer">Sizes</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Socket+Weld+flanges.pdf" target="_blank" rel="noopener noreferrer">Socket Weld flanges</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Tees.pdf" target="_blank" rel="noopener noreferrer">Tees</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Threaded+flanges.pdf" target="_blank" rel="noopener noreferrer">Threaded flanges</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Tubes+ANSI.pdf" target="_blank" rel="noopener noreferrer">Tubes ANSI</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Tubes+EN.pdf" target="_blank" rel="noopener noreferrer">Tubes EN</a>
+                                        <a className="dropdown-item" href="https://vanleeuwenlcg.s3.eu-west-3.amazonaws.com/VLUNAR+-+Welding+Neck+flanges.pdf" target="_blank" rel="noopener noreferrer">Welding Neck flanges</a>
+                                    </div>
+                                </li> */}
                             </ul>
                         </div>
                     </div>
