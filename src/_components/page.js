@@ -494,7 +494,7 @@ class Page extends Component{
                         </div>
                     </div>
                     <div className="bottom-nav">
-                        <div className="container-xl" style={{height: '100%'}}>
+                        <div className="container-xl" style={{height: '100%', padding: '0px'}}>
                             <ul className="nav" style={{height: '100%'}}>
                                 <li className="nav-item">
                                     <a
